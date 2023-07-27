@@ -65,5 +65,16 @@ namespace Tourism.Controllers
 
             return Redirect($"/states/{stateId}");
         }
+
+        [HttpPost]
+        [Route("/states/delete/{stateId:int}")]
+        public IActionResult Delete(int stateId)
+        {
+            var state = _context.States.Find(stateId);
+            _context.States.Remove(state);
+            _context.SaveChanges();
+
+            return Redirect("/states");
+        }
     }
 }
