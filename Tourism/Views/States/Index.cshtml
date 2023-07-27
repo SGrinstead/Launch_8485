@@ -1,6 +1,20 @@
-﻿@model List<State>
+﻿@model IEnumerable<State>
+@{List<string> allTimezones = ViewData["AllTimezones"] as List<string>;}
 
 <h1>States</h1>
+
+<h4>Filter by Timezone</h4>
+
+@foreach (var timezone in allTimezones)
+{
+    <a href="/states?timezone=@timezone">@timezone</a> <span> | </span>
+}
+<a href="/states">All Timezones</a>
+
+@if(ViewData["SearchTimezone"] != null)
+{
+    <h3>Filtering by @ViewData["SearchTimezone"] Timezone</h3>
+}
 
 @foreach (var state in Model)
 {
